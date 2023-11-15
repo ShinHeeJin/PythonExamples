@@ -58,9 +58,6 @@ class UnitOfWork:
     events: list = field(default_factory=list)
     close: bool = False
 
-    def __post_init__(self):
-        self.close = True
-
     def execute(self):
         try:
             print(f"execute! => work_id : {self.work_id}")
@@ -72,8 +69,10 @@ class UnitOfWork:
 try:
     uow = UnitOfWork(1, [])
     uow.execute()
+    assert uow.close == False
 finally:
     uow.close = True
 
 # UnitOfWork(work_id=1, events=[MyException('Error in UnitOfWork')], close=True)
-print(uow)
+assert uow.close == True
+assert len(uow.events) == 1
