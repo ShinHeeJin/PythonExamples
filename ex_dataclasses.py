@@ -1,5 +1,4 @@
 from dataclasses import dataclass, field, asdict, astuple
-from dataclasses import FrozenInstanceError
 from datetime import date
 
 
@@ -25,6 +24,11 @@ assert astuple(data) == (-1, 0, -1, [])
 data.points.append(1)
 assert data.points == [1]
 
+# --------------------------------------------------------------------
+
+from dataclasses import dataclass
+from dataclasses import FrozenInstanceError
+
 
 @dataclass(frozen=True, unsafe_hash=True)
 class User:
@@ -45,6 +49,9 @@ except FrozenInstanceError as e:
 
 assert user != user2
 assert user2 == user3
+
+# --------------------------------------------------------------------
+
 from dataclasses import dataclass, field
 
 
@@ -76,3 +83,24 @@ finally:
 # UnitOfWork(work_id=1, events=[MyException('Error in UnitOfWork')], close=True)
 assert uow.close == True
 assert len(uow.events) == 1
+
+# --------------------------------------------------------------------
+
+from dataclasses import dataclass, field
+
+
+@dataclass
+class MyCollector:
+    data: list = field(default_factory=list)
+
+    def __post_init__(self):
+        for idx in range(5):
+            self.data.append(idx)
+
+    def collect(self):
+        while self.data:
+            yield self.data.pop(0)
+
+
+collector = MyCollector()
+assert list(collector.collect()) == [0, 1, 2, 3, 4]
