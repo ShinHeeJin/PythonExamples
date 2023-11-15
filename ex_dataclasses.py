@@ -45,3 +45,35 @@ except FrozenInstanceError as e:
 
 assert user != user2
 assert user2 == user3
+from dataclasses import dataclass, field
+
+
+class MyException(Exception):
+    pass
+
+
+@dataclass
+class UnitOfWork:
+    work_id: int
+    events: list = field(default_factory=list)
+    close: bool = False
+
+    def __post_init__(self):
+        self.close = True
+
+    def execute(self):
+        try:
+            print(f"execute! => work_id : {self.work_id}")
+            raise MyException(f"Error in {self.__class__.__name__}")
+        except MyException as e:
+            self.events.append(e)
+
+
+try:
+    uow = UnitOfWork(1, [])
+    uow.execute()
+finally:
+    uow.close = True
+
+# UnitOfWork(work_id=1, events=[MyException('Error in UnitOfWork')], close=True)
+print(uow)
