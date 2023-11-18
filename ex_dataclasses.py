@@ -1,3 +1,4 @@
+from dataclasses import dataclass, field
 from dataclasses import dataclass, field, asdict, astuple
 from datetime import date
 
@@ -104,3 +105,25 @@ class MyCollector:
 
 collector = MyCollector()
 assert list(collector.collect()) == [0, 1, 2, 3, 4]
+
+
+# --------------------------------------------------------------------
+
+
+@dataclass
+class Parent:
+    id: int
+    name: str
+    static_childs = []
+    childs: list = field(default_factory=list)
+
+
+parent = Parent(id=1, name="test")
+parent2 = Parent(id=2, name="test2")
+
+assert parent.childs == parent.static_childs
+parent.childs.append(1)
+parent.static_childs.append(1)
+
+assert parent2.static_childs == [1]
+assert parent2.childs == []
