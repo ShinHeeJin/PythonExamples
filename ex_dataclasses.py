@@ -50,6 +50,7 @@ except FrozenInstanceError as e:
 
 assert user != user2
 assert user2 == user3
+assert len(set([user, user2, user3])) == 2
 
 # --------------------------------------------------------------------
 
