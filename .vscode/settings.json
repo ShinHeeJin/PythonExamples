@@ -1,0 +1,16 @@
+{
+  "python.defaultInterpreterPath": "~/Library/Caches/pypoetry/virtualenvs/python-ex-X1KMAEzm-py3.11/bin/python",
+  "[python]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.codeActionsOnSave": {
+      "source.fixAll.ruff": true,
+      "source.organizeImports": true
+    }
+  },
+  "[git-commit]": {
+    "editor.fontFamily": "D2Coding",
+    "editor.rulers": [50, 72]
+  },
+  "black-formatter.args": ["--line-length", "115"]
+}
