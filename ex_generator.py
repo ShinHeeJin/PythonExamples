@@ -22,3 +22,34 @@ repository = MyRepository(objects)
 repository.add(MyObject(4))
 assert repository.get(2).id == 2
 assert repository.get(5) is None
+
+# --------------------------
+
+
+def number_generator():
+    x = [1, 2, 3]
+    for i in x:
+        yield i
+
+
+def number_generator_by_yield_from():
+    x = [1, 2, 3]
+    yield from x
+
+
+# ---------------------------
+
+
+def generator(stop):
+    n = 0
+    while n < stop:
+        yield n
+        n += 1
+
+
+def three_generator():
+    yield from generator(3)
+
+
+for i in three_generator():
+    print(i)
