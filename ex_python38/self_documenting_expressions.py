@@ -8,4 +8,4 @@ pi = 3.141592
 print(f"{pi = :.3f}")  # pi = 3.142
 
 number = 30000
-print(f"{number = :,d}")  # pi = 3.142
+print(f"{number = :,d}")  # pi = 30,000

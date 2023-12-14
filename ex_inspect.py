@@ -7,14 +7,14 @@ def myfunc(a: int = 1, b: float = 2) -> int:
     return a + int(b)
 
 
-signature = signature(myfunc)
-print(signature.parameters)  # OrderedDict([('a', <Parameter "a: int = 1">), ('b', <Parameter "b: float = 2">)])
+sig = signature(myfunc)
+print(sig.parameters)  # OrderedDict([('a', <Parameter "a: int = 1">), ('b', <Parameter "b: float = 2">)])
 
-assert "a" in signature.parameters
-assert "b" in signature.parameters
-assert "c" not in signature.parameters
+assert "a" in sig.parameters
+assert "b" in sig.parameters
+assert "c" not in sig.parameters
 
-assert signature.return_annotation == int
-assert signature.parameters.get("a").default == 1
-signature.parameters.get("a").annotation == int
-signature.parameters.get("b").annotation == float
+assert sig.return_annotation == int
+assert sig.parameters.get("a").default == 1
+sig.parameters.get("a").annotation == int
+sig.parameters.get("b").annotation == float

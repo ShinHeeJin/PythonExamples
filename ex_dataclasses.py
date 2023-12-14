@@ -1,5 +1,4 @@
-from dataclasses import dataclass, field
-from dataclasses import dataclass, field, asdict, astuple
+from dataclasses import FrozenInstanceError, asdict, astuple, dataclass, field
 from datetime import date
 
 
@@ -27,9 +26,6 @@ assert data.points == [1]
 
 # --------------------------------------------------------------------
 
-from dataclasses import dataclass
-from dataclasses import FrozenInstanceError
-
 
 @dataclass(frozen=True, unsafe_hash=True)
 class User:
@@ -54,8 +50,6 @@ assert len(set([user, user2, user3])) == 2
 
 # --------------------------------------------------------------------
 
-from dataclasses import dataclass, field
-
 
 class MyException(Exception):
     pass
@@ -78,17 +72,15 @@ class UnitOfWork:
 try:
     uow = UnitOfWork(1, [])
     uow.execute()
-    assert uow.close == False
+    assert uow.close is False
 finally:
     uow.close = True
 
 # UnitOfWork(work_id=1, events=[MyException('Error in UnitOfWork')], close=True)
-assert uow.close == True
+assert uow.close is True
 assert len(uow.events) == 1
 
 # --------------------------------------------------------------------
-
-from dataclasses import dataclass, field
 
 
 @dataclass
