@@ -15,17 +15,28 @@ def single_process_single_thread_sum():
     print("increased_num=",end=""), print(increased_num)
     print("end of single_process_single_thread_sum")
 
+"""
+Lock()
+lock을 acquire하면 해당 쓰레드만 공유 데이터에 접근할 수 있고
+lock을 release 해야만 다른 쓰레드에서 공유 데이터에 접근할 수 있습니다.
+"""
 shared_number = 0
+
+lock = threading.Lock()
 
 def thread_1(number):
     global shared_number
+    lock.acquire()
     for _ in range(number):
         shared_number += 1
+    lock.release()
 
 def thread_2(number):
     global shared_number
+    lock.acquire()
     for _ in range(number):
         shared_number += 1
+    lock.release()
 
 def single_process_two_thead_sum():
     threads = [ ]
