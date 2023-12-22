@@ -10,14 +10,20 @@ class HtmlGetter(threading.Thread):
         self.url = url
 
     def run(self):
-        resp = requests.get(self.url)
+        self.resp = requests.get(self.url)
         time.sleep(1)
-        print(self.url, len(resp.text), "chars")
+        print(self.url, len(self.resp.text), "chars")
+
+    def get_resp(self):
+        return self.resp
 
 
 def main():
     t = HtmlGetter("http://google.com")
     t.start()
+    t.join()
+    resp = t.get_resp()
+    print(f"{resp.status_code=}")
 
 
 if __name__ == "__main__":
