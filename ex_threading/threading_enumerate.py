@@ -13,3 +13,4 @@ for i in range(10):
     thread = threading.Thread(target=executedThread, args=(i,))
     thread.start()
     print(f"Active Threads : {threading.enumerate()}")
+    print(f"Active Thread Count : {threading.active_count()}")
