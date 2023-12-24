@@ -12,10 +12,17 @@ def executedThread(i):
     print(f"Thread {i} finished")
 
 
+threads = []
 for i in range(10):
     thread = threading.Thread(target=executedThread, args=(i,))
     thread.start()
+    threads.append(thread)
     print(f"Active Threads : {threading.enumerate()}")
     # [<_MainThread(MainThread, started 140704300631808)>, <Thread(Thread-1 (executedThread), started 123145390915584)>]
 
     print(f"Active Thread Count : {threading.active_count()}")  # 2
+
+for thread in threads:
+    thread.join()
+
+print("program end!!")
