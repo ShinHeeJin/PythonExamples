@@ -8,7 +8,7 @@ import time
 
 
 class TicketSeller(threading.Thread):
-    ticketsSold = 0
+    tickets_sold = 0
 
     def __init__(self, semaphore: threading.Semaphore, **kwargs):
         super().__init__(**kwargs)
@@ -16,29 +16,26 @@ class TicketSeller(threading.Thread):
         print(f"Ticket Seller {self.name} Started work")
 
     def run(self):
-        running = True
-        while running:
+        global tickets_available
+        while tickets_available > 0:
             self.random_delay()
-            self.semaphore.acquire()
-            if ticketsAvailable <= 0:
-                running = False
-            else:
-                self.sell()
-            self.semaphore.release()
-        print(f"Ticket Seller {self.name} Sold {self.ticketsSold} tickets in total")
+            with self.semaphore:
+                if tickets_available > 0:
+                    self.sell()
+        print(f"Ticket Seller {self.name} Sold {self.tickets_sold} tickets in total")
 
     def random_delay(self):
         time.sleep(random.randint(0, 4) / 4)
 
     def sell(self):
-        global ticketsAvailable
-        self.ticketsSold += 1
-        ticketsAvailable -= 1
-        print(f"{self.name} Sold One ({ticketsAvailable} left)")
+        global tickets_available
+        self.tickets_sold += 1
+        tickets_available -= 1
+        print(f"{self.name} Sold One ({tickets_available} left)")
 
 
 semaphore = threading.Semaphore()
-ticketsAvailable = 20
+tickets_available = 20
 
 sellers: list[TicketSeller] = []
 for i in range(4):
