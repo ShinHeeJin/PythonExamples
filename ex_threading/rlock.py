@@ -3,6 +3,11 @@ import time
 
 
 class myWorker:
+    """
+    RLock은 이미 Lock이 잠긴 상태에서도 자신을 잠그려는 스레드가 이미 자신을 잠근 스레드라면
+    잠김수 Count를 1 올리면서 즉시 반환하는 Lock ( reentrant-lock )
+    """
+
     def __init__(self):
         self.a = 1
         self.b = 2
