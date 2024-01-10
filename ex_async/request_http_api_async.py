@@ -1,21 +1,28 @@
 # ref : https://tech.madup.com/python-asyncio-intro/
-
 import asyncio
 from time import perf_counter
 
 import aiohttp
+import requests
+
+headers = {"User-Agent": "Mozilla/5.0"}
 
 
 async def get_content(url):
     async with aiohttp.ClientSession() as session:
-        async with session.get(url, headers={"User-Agent": "Mozilla/5.0"}) as response:
+        async with session.get(url, headers=headers) as response:
             result = await response.text()
             return len(result)
 
 
+async def sync_get_content(url):
+    response = requests.get(url, headers=headers)
+    return len(response.text)
+
+
 async def get_contents():
     coroutines = [
-        get_content(url)
+        sync_get_content(url)
         for url in [
             "https://www.google.co.kr/search?q=" + i
             for i in ["apple", "pear", "grape", "pineapple", "orange", "strawberry"]
