@@ -48,6 +48,7 @@ assert r.lrange("personList", 0, 5) == ["park", "kim", "hong", "han", "choi"]
 # expire
 expired_in = 1
 r.set("expired_in", 10, expired_in)
+assert r.ttl("expired_in") == expired_in
 assert r.get("expired_in") == "10"
 time.sleep(expired_in)
 assert r.get("expired_in") is None
