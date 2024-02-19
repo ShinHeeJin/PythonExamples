@@ -18,6 +18,7 @@ pydantic-settings = "^2.1.0"
 paho-mqtt = "^1.6.1"
 dataclasses-json = "^0.6.4"
 redis = {version = "5.0.1", extras = ["hiredis"]}
+pytest-asyncio = "^0.23.5"
 
 
 [build-system]
