@@ -17,6 +17,10 @@ except Exception:
 # 1.1 logging.error(msg, exc_info=True)
 """
 ERROR:root:Exception occured
+Traceback (most recent call last):
+  File "D:test.py", line 2, in <module>
+    0 / 0
+ZeroDivisionError: division by zero
 """
 try:
     0 / 0
@@ -56,7 +60,7 @@ except Exception as e:
 # 5. trace.format_exec()
 """
 ERROR:root:Traceback (most recent call last):
-  File "D:test.py", line 4, in <module>
+  File "D:test.py", line 2, in <module>
     0 / 0
 ZeroDivisionError: division by zero
 """
