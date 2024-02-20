@@ -1,0 +1,32 @@
+version: 1
+disable_existing_loggers: False
+
+formatters:
+  consoleFormatter:
+    format: "%(asctime)s | %(name)s | %(levelname)s : %(message)s"
+  fileFormatter:
+    format: "%(asctime)s | %(name)s | %(levelname)s : %(message)s"
+
+handlers:
+  file:
+    filename: debug_yaml.log
+    level: DEBUG
+    class: logging.FileHandler
+    formatter: fileFormatter
+  console:
+    level: WARNING
+    class: logging.StreamHandler
+    formatter: consoleFormatter
+
+loggers:
+  root:
+    level: WARNING
+    handlers: 
+      - file # root로거의 level이 WARNING 으로 file의 DEBUG 보다 높으므로, file에는 WARNING이 적용된다.
+      - console # root로거의 level이 WARNING 으로 console의 WARNING 과 같으므로, console에는 WARNING이 적용된다.
+
+  my_logger:
+    level: DEBUG
+    handlers:
+      - file # my_logger의 level이 DEBUG 으로 file의 DEBUG와 같으므로, file 에는 DEBUG이 적용 된다.
+      - console # my_logger의 level이 DEBUG 으로 console의 WARNING보다 낮으므로 console에는 WARNING이 적용 된다.
