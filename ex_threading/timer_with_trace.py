@@ -1,6 +1,11 @@
+import logging
 import sys
 import threading
 import time
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
+logger.addHandler(logging.StreamHandler())
 
 
 class thread_with_trace(threading.Thread):
@@ -42,6 +47,7 @@ class MyScheduler:
         self.timer_stop = False
 
     def timer_func(self):
+        logger.debug(f"timer_func executed, {threading.current_thread().name}")
         self.lock.acquire()
 
         if self.timer_stop:
@@ -60,7 +66,7 @@ class MyScheduler:
         self.lock.release()
 
     def main_logic(self, started_time):
-        print(f"main logic executed: {started_time}, {threading.current_thread().name}")
+        logger.debug(f"main logic executed: {started_time}, {threading.current_thread().name}")
 
 
 def main():
@@ -70,4 +76,4 @@ def main():
 
 if __name__ == "__main__":
     main()
-    print("Main Thread end")
+    logger.debug("Main Thread end")
