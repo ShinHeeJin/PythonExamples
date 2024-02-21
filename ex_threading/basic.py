@@ -5,10 +5,16 @@ Thread 객체의 start() 메서드를 호출하면 된다. 서브쓰레드는 �
 (2) threading.Thread 로부터 파생된 파생클래스를 작성하여 사용하는 방식 등이 있다.
 """
 
+import logging
 import threading
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
+logger.addHandler(logging.StreamHandler())
 
 
 def my_sum(a, b):
+    logger.debug(f"Current Thread : {threading.current_thread()}, a : {a}, b : {b}")
     count = 0
     for i in range(a, b + 1):
         count += i
@@ -17,10 +23,10 @@ def my_sum(a, b):
 
 def main():
     thread = threading.Thread(target=my_sum, args=(1, 10))
-    print("Sub Thread start")
+    logger.debug("Sub Thread start")
     thread.start()
 
 
 if __name__ == "__main__":
+    logger.debug("Main Thread")
     main()
-    print("Main Thread")
