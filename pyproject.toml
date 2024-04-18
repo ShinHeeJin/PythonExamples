@@ -19,6 +19,7 @@ paho-mqtt = "^1.6.1"
 dataclasses-json = "^0.6.4"
 redis = {version = "5.0.1", extras = ["hiredis"]}
 pytest-asyncio = "^0.23.5"
+pyarmor = "^8.5.2"
 
 
 [build-system]
