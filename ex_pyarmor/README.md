@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 ## 0. 설치
-=======
-### 설치
->>>>>>> 89647633c02372f6c2fbc8e8849fb605e99760e4
 ```bash
 $ poetry add pyarmor
 ```
@@ -11,23 +7,14 @@ $ poetry add pyarmor
 ## 1. 단일 파일 암호화
 
 ### a. 암호화
-<<<<<<< HEAD
 - 디폴터 옵션으로 /dist 디렉토리 하위에 난독화된 파일이 저장된다.
 ```cmd
 (python-ex-py3.11) D:\envs\public_repositories\python-ex\ex_pyarmor>pyarmor gen single_file.py
-=======
-```bash
-(python-ex-py3.11) D:\envs\public_repositories\python-ex\ex_pyarmor>pyarmor gen to_be_encrypted.py
->>>>>>> 89647633c02372f6c2fbc8e8849fb605e99760e4
 INFO     Python 3.11.7
 INFO     Pyarmor 8.5.2 (trial), 000000, non-profits
 INFO     Platform windows.x86_64
 INFO     search inputs ...
-<<<<<<< HEAD
 INFO     find script single_file.py
-=======
-INFO     find script to_be_encrypted.py
->>>>>>> 89647633c02372f6c2fbc8e8849fb605e99760e4
 INFO     find 1 top resources
 INFO     start to generate runtime files
 INFO     target platforms {'windows.amd64'}
