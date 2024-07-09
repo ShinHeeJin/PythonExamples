@@ -1,7 +1,10 @@
 import os
 from pathlib import Path
 
-print(Path.cwd())  # /Users/heej/Projects/python-ex
+print(Path(__file__).parent / "test.txt")  # /Users/heej/envs/python-ex/ex_filesystem/test.txt
+print(Path(__file__).parent)  # /Users/heej/envs/python-ex/ex_filesystem
+print(Path(__file__))  # /Users/heej/envs/python-ex/ex_filesystem/pathlib_basic.py
+print(Path.cwd())  # /Users/heej/envs/python-ex/ex_filesystem
 print(Path.home())  # /Users/heej
 
 # 파일 생성
